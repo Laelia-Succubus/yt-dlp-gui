@@ -1,0 +1,10 @@
+services:
+  ytdlp-webui:
+    build:
+      context: ..
+      dockerfile: yt-dlp-gui-docker/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./downloads:/app/downloads
+    restart: unless-stopped
