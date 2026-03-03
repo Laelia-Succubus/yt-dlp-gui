@@ -1,0 +1,8 @@
+services:
+  ytdlp-webui:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./downloads:/app/downloads
+    restart: unless-stopped
