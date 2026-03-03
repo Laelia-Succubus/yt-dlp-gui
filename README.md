@@ -151,8 +151,8 @@ ytdlp-webui/
 ├── index.html          # Web frontend
 ├── Dockerfile          # Docker image definition
 ├── docker-compose.yaml # Docker Compose configuration
-├── downloads/          # Downloaded files (created on first run)
-└── README.md           # This file
+├── downloads/         # Downloaded files (created on first run)
+└── README.md          # This file
 ```
 
 ## Credits
