@@ -2,6 +2,21 @@
 
 A modern, cross-platform web-based frontend for yt-dlp, ported from the Windows/.NET yt-dlp-gui application.
 
+## Project Structure
+
+```
+yt-dlp-gui/
+├── yt-dlp-gui/          # Original Windows WPF application
+├── languages/           # Localization files for Windows app
+├── yt-dlp-gui-python/   # Python/Bottle web backend
+│   ├── app.py          # Backend server
+│   └── index.html      # Web frontend
+├── yt-dlp-gui-docker/  # Docker configuration
+│   ├── Dockerfile
+│   └── docker-compose.yaml
+└── README.md
+```
+
 ## Features
 
 - **Web-based UI** - Access from any device via browser
@@ -17,11 +32,11 @@ A modern, cross-platform web-based frontend for yt-dlp, ported from the Windows/
 - Docker
 - Docker Compose
 
-## Quick Start
+## Quick Start (Docker)
 
 ```bash
-# Clone or download the files
-cd /path/to/ytdlp-webui
+# Navigate to docker folder
+cd yt-dlp-gui-docker
 
 # Build and start the container
 docker compose up -d
@@ -35,6 +50,9 @@ open http://localhost:8080
 ### Standalone (Direct Python)
 
 ```bash
+# Navigate to Python folder
+cd yt-dlp-gui-python
+
 # Install dependencies
 pip install yt-dlp bottle
 
@@ -49,8 +67,10 @@ python3 app.py
 ### Docker
 
 ```bash
+cd yt-dlp-gui-docker
+
 # Build image
-docker build -t ytdlp-webui .
+docker build -t ytdlp-webui -f yt-dlp-gui-docker/Dockerfile ..
 
 # Run container
 docker run -d -p 8080:8080 -v ./downloads:/app/downloads ytdlp-webui
@@ -59,6 +79,8 @@ docker run -d -p 8080:8080 -v ./downloads:/app/downloads ytdlp-webui
 ### Docker Compose
 
 ```bash
+cd yt-dlp-gui-docker
+
 # Start services
 docker compose up -d
 
@@ -93,24 +115,6 @@ docker compose down
 yt-dlp supports thousands of video websites. For a full list, visit:
 https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md
 
-## Configuration
-
-### Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| PORT | 8080 | Server port |
-| DOWNLOADS_DIR | /app/downloads | Download directory |
-
-### Docker Volume Mounts
-
-Mount local directories to persist data:
-
-```yaml
-volumes:
-  - ./downloads:/app/downloads  # Downloaded files
-```
-
 ## Security
 
 The web UI runs without authentication. For production deployments:
@@ -137,22 +141,9 @@ The web UI runs without authentication. For production deployments:
 ### Port already in use
 
 Change the port in docker-compose.yaml:
-
 ```yaml
 ports:
   - "8090:8080"
-```
-
-## Project Structure
-
-```
-ytdlp-webui/
-├── app.py              # Bottle backend server
-├── index.html          # Web frontend
-├── Dockerfile          # Docker image definition
-├── docker-compose.yaml # Docker Compose configuration
-├── downloads/         # Downloaded files (created on first run)
-└── README.md          # This file
 ```
 
 ## Credits
